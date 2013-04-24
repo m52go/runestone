@@ -1,25 +1,33 @@
 class Fraction():
     def __init__(self, top, bottom):
-        self.num = top
-        self.den = bottom
-    
+        if(type(top) is int) and (type(bottom) is int):
+            newgcd = self.gcd(top, bottom)
+            self.num = top/newgcd
+            self.den = bottom/newgcd
+        else:
+            raise RuntimeError("Non-integer input for new Fraction!")    
+
     @staticmethod 
     def gcd(num1, num2):
         while (num1 % num2) != 0:
             num1, num2 = num2, num1%num2
         return(num2)
+    
+    def getNum(self):
+        return self.num
+    
+    def getDen(self):
+        return self.den
 
     def __add__(self, frac):
         num = (self.num * frac.den) + (frac.num * self.den)
         den = self.den * frac.den
-        newgcd = self.gcd(num, den)
-        return(Fraction(num/newgcd, den/newgcd))
+        return(Fraction(num, den))
 
     def __sub__(self, frac):
         num = (self.num * frac.den) - (frac.num * self.den)
         den = self.den * frac.den
-        newgcd = self.gcd(num, den)
-        return(Fraction(num/newgcd, den/newgcd))
+        return(Fraction(num, den))
 
     def __eq__(self, frac):
         num = False; den = False
@@ -32,8 +40,7 @@ class Fraction():
     def __mul__(self, frac):
         num = self.num * frac.num
         den = self.den * frac.den
-        newgcd = self.gcd(num, den)
-        return(Fraction(num/newgcd, den/newgcd))
+        return(Fraction(num, den))
 
     def __div__(self, frac):
         reciprocal = Fraction(frac.den, frac.num)
