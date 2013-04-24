@@ -1,3 +1,5 @@
+# playing with list comprehensions
+
 wordlist = ['cat','dog','rabbit']
 
 # i'd never write this long of a list comprehension in real life, but i wanted

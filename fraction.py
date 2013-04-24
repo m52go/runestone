@@ -1,3 +1,6 @@
+# a class that simulates fractions, i.e., a/b for some integers a and b instead
+# representing them as floating-point numbers
+
 class Fraction():
     def __init__(self, top, bottom):
         if(type(top) is int) and (type(bottom) is int):

@@ -1,3 +1,5 @@
+# general sudoku solver. to be continued...
+
 class Sudoku(object):
     def __init__(self, loc=None):
         filename = "sudoku.txt" if not loc else loc
@@ -7,14 +9,14 @@ class Sudoku(object):
         self.quadrants = self.makequads(self.rows)
         self.contains = self.makecontains()
         self.poss = {}
-        self.allnums = set([0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+        self.allnums = set([1, 2, 3, 4, 5, 6, 7, 8, 9])
         
     def getcontain(self):
         templist = [] # list of numbers in current row, column, and quadrant
         for i in range(len(self.rows)):
             for j in range(len(self.rows[i])):
                 templist = self.rows[j] + self.cols[i] + self.quadrants[(j/3,i/3)]
-                templist = set([k for k in templist if k != -1])
+                templist = set([k for k in templist if k != 0])
                 self.contains[(i, j)] = self.contains[(i, j)].union(templist)
                 templist = []
 
@@ -95,5 +97,5 @@ class Sudoku(object):
             returnstr += "  ".join([str(j) for j in i]) + "\n"
             if((self.rows.index(i)+1)%3 == 0):
                 returnstr += "-------------------------\n"
-        returnstr = returnstr.replace("-1", " ")
+        returnstr = returnstr.replace("0", " ")
         return returnstr
